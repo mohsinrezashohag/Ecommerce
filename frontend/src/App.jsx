@@ -5,17 +5,15 @@ import ActivationPage from "./pages/ActivationPage";
 import axios from "axios";
 import { useEffect } from "react";
 import { server } from "../Constant";
-import { toast } from "./components/ui/use-toast";
+import store from "./redux/app/store";
+import { loadUser } from "./redux/actions/user";
+import HomePage from "./pages/HomePage";
 
 
 function App() {
-
+  
   useEffect(()=>{
-    axios.get(`${server}/user/get-user`,{withCredentials : true}).then((res)=>{
-      toast({title :res.data.message})
-    }).catch((error)=>{
-      toast({title :error.response.data.message})
-    })
+    store.dispatch(loadUser());
   })
 
 
@@ -23,6 +21,7 @@ function App() {
    <>
  <BrowserRouter>
         <Routes>
+          <Route path="/" element={<HomePage></HomePage>}/>
           <Route path="/login" element={<Login></Login>} />
           <Route path="/register" element={<Register></Register>} />
           <Route path="/activation/:activationToken" element={<ActivationPage></ActivationPage>} />

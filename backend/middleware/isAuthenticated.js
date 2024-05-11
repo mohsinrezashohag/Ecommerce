@@ -1,21 +1,30 @@
 const resHandler = require("../utils/resHandler");
-const jwt= require("jsonwebtoken") 
+const jwt = require("jsonwebtoken");
 
-module.exports.isAuthenticated=async(req,res,next)=>{
-try {
-    const {token} = req.cookies;
+module.exports.isAuthenticated = async (req, res, next) => {
+    try {
 
-    if (!token){
-        return resHandler(res,401,false,"please login first")
+        console.log("middle war is jhamela");
+
+        console.log(req.body);
+        const { token } = req.cookies;
+
+        console.log("token in m",token);
+        if (!token) {
+            return resHandler(res, 401, false, "Please login first");
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+        // Assuming `User` is properly imported and represents your User model
+        req.user = await User.findById(decoded.id);
+
+        if (!req.user) {
+            return resHandler(res, 401, false, "Invalid user");
+        }
+
+        next();
+    } catch (error) {
+        return resHandler(res, 401, false, "Unauthorized");
     }
-
-    const decoded = jwt.verify(token,process.env.JWT_SECRET_KEY)
-
-    req.user = await User.findById(decoded.id);
-
-    next();
-
-} catch (error) {
-    
-}
-}
+};

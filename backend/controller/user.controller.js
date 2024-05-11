@@ -2,8 +2,9 @@ const User = require("../models/user.model");
 const fs = require("fs");
 const jwt = require('jsonwebtoken');
 const sendMail = require("../utils/sendMail");
-const createActivationToken = require("../utils/tokenGenerate");
+const createActivationToken = require("../utils/activationTokenGenerate");
 const resHandler = require("../utils/resHandler");
+const { sendToken } = require("../utils/sendToken");
 // const ErrorHandler = require("../utils/ErrorHandler");
 
 module.exports.registerUser = async (req, res, next) => {
@@ -48,14 +49,6 @@ module.exports.registerUser = async (req, res, next) => {
       console.log(error);
     }
 
-    // // user creation
-    // const newUser = await User.create(user);
-
-    // return res.status(200).json({
-    //   success: true,
-    //   message: "User created successfully",
-    //   // user: newUser,
-    // });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -71,7 +64,6 @@ module.exports.registerUser = async (req, res, next) => {
 // activate user
 module.exports.activateUser =async(req,res,next)=>{
   try {
-    console.log("hitting after clicking");
     const {activationToken} = req.body;
     const newUser = jwt.verify(activationToken,process.env.JWT_SECRET_KEY)
 
@@ -120,6 +112,7 @@ module.exports.LoginUser =async(req,res,next)=>{
     }
 
     sendToken(user, 201, res);
+  
   } catch (error) {
     
   }
@@ -127,15 +120,14 @@ module.exports.LoginUser =async(req,res,next)=>{
 
 // load user
 
-module.exports.loadUser=async()=>{
-  try {
-    const {email,password} = req.body;
-    const user = await  User.findById(req.user.id) ;
+module.exports.loadUser=async(req,res,next)=>{
 
+  console.log(req.body);
+  try {
+    const user = await  User.findById(req.user.id) ;
     if (!user){
       return resHandler(res,400, false,"User  does't exists")
     }
-
     res.status(200).json({
       success : true,
       user : user

@@ -22,7 +22,7 @@ const upload = multer({ storage: storage })
 router.post('/register',upload.single("avatar"),userController.registerUser)
 router.post('/activation',userController.activateUser)
 router.post('/login-user',userController.LoginUser)
-router.post('/get-user',isAuthenticated,userController.LoginUser)
+router.post('/get-user',isAuthenticated,userController.loadUser)
 
 
 module.exports = router
