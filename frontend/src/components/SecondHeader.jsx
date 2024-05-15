@@ -14,12 +14,17 @@ import Navbar from "../components/Navbar";
 import { CgProfile } from "react-icons/cg";
 import Cart from "./Cart";
 import Wishlist from "./Wishlist";
+import { useSelector } from "react-redux";
+import { server } from "../../Constant";
 
 // eslint-disable-next-line react/prop-types
 const SecondHeader = ({ active }) => {
   //demo purpose
-const isAuthenticated = true
-const user =null
+  let  isAuthenticated = false
+const {user} = useSelector(state => state.user)
+if (user !==null){
+   isAuthenticated = true
+}
 
   const [searchText, setSearchText] = useState();
   const [searchData, setSearchData] = useState();
@@ -39,7 +44,6 @@ const user =null
 
     setSearchData(filteredProducts);
   };
-
   // menu sticky feature
   window.addEventListener("scroll", () => {
     if (window.scrollY > 70) {
@@ -48,10 +52,9 @@ const user =null
       setMenuActive(false);
     }
   });
-
   return (
-    <div className={`${commonStyles.section}`}>
-      <div className="flex flex-col md:flex-row md:my-4 items-center justify-between">
+    <div className={`${commonStyles.section} w-full`}>
+      <div className="flex flex-col md:flex-row my-4 py-4 md:my-0 items-center justify-between px-20">
         <div>
           <Link to="/">
             <img
@@ -62,17 +65,18 @@ const user =null
         </div>
 
         <div className="w-[50%] relative">
-          <input
-            type="text"
-            placeholder="Search Product..."
-            value={searchText}
-            onChange={handleSearchChange}
-            className="h-[40px] w-full px-2 border-[#3957db] border-[2px] rounded-md"
-          />
-          <AiOutlineSearch
-            size={30}
-            className="absolute right-2 top-1.5 cursor-pointer"
-          />
+        <input
+    type="text"
+    placeholder="Search Product..."
+    value={searchText}
+    onChange={handleSearchChange}
+    className="h-[50px] w-full px-4 border-white border-[2px] rounded-full bg-blue-400 text-white placeholder-white"
+/>
+<AiOutlineSearch
+color="white"
+    size={30}
+    className="absolute right-4 top-3 cursor-pointer"
+/>
           {searchData && searchData.length !== 0 ? (
             <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
               {searchData &&
@@ -113,7 +117,7 @@ const user =null
         >
           {/* categories */}
 
-          <div className="">
+          <div className=" md:ms-16">
             <div
               className="bg-white text-black relative h-[68px] ml-2 mt-[10px] w-[270px] flex justify-between items-center cursor-pointer rounded-t-lg"
               onClick={() => setDropDown(!dropDown)}
@@ -171,12 +175,14 @@ const user =null
             <div className="relative cursor-pointer mr-[15px]">
               {isAuthenticated ? (
                 <Link to="/profile">
-                  <img
-                    src={`${user ? user?.avatar?.url : ""}`}
-                    className="w-[35px] h-[35px] rounded-full"
-                    alt=""
-                  />
-                </Link>
+                <img
+                  src={`http://localhost:8000/uploaded-images/${user.avatar}`}
+
+
+className="w-[200px] h-[40px] rounded-full border-[3px] border-white border-spacing-14]"
+alt=""
+                />
+              </Link>
               ) : (
                 <Link to="/login">
                   <CgProfile size={30} color="rgb(255 255 255 / 83%)" />

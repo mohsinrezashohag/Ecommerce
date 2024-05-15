@@ -7,16 +7,15 @@ import ProductDetailsCard from "./ProductDetailsCard";
 
 // eslint-disable-next-line react/prop-types
 const ProductCard = ({product}) => {
-    console.log(product);
     const [click,setClick] = useState(false)
-     const [open,setOpen] = useState()
+    const [open,setOpen] = useState(false)
 
 
      const addToCartHandler =()=>{
      }
 
      const removeFromWishlistHandler =()=>{
-        setClick(!click)
+
      }
      const addToWishlistHandler =()=>{
         setClick(!click)
@@ -100,7 +99,8 @@ const ProductCard = ({product}) => {
         color="#444"
         title="Add to cart"
       />
-      {open ? <ProductDetailsCard setOpen={setOpen} product={product} /> : null}
+      {/* {open ? <ProductDetailsCard setOpen={setOpen} data={product} /> : null} */}
+      {<ProductDetailsCard setOpen={setOpen} open ={open} product={product}/>}
     </div>
   </div>
 </>;

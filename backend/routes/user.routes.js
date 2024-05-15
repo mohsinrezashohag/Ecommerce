@@ -10,7 +10,7 @@ const { isAuthenticated } = require('../middleware/isAuthenticated')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploaded-images')
+        cb(null, 'public/uploaded-images')
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))

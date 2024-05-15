@@ -22,17 +22,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { server } from "../../Constant";
 import { toast } from "@/components/ui/use-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthInfo } from "@/redux/features/userSlice";
 
 const Login = () => {
   const [loginInfo,setLoginInfo] = useState({email:"",password:""})
   const [visible, setVisible] = useState(false);
 
   const navigate = useNavigate();
-
+const dispatch = useDispatch()
 
 
   const handleSubmit = async(e) => {
@@ -47,16 +49,26 @@ const Login = () => {
       { withCredentials: true }
     )
     .then((res) => {
+      console.log(res.data.user);
+      dispatch(setAuthInfo(res.data))
+      localStorage.setItem("user",JSON.stringify(res.data.user))
       toast({ title: "Login Successful" });
       navigate("/");
-      window.location.reload(true); 
+      // window.location.reload(true); 
     })
     .catch((err) => {
-      toast({ title: err.response.data.message });
+      toast({ title: "hello" });
     });
 };
 
 
+
+const user = useSelector(state => state.user)
+useEffect(()=>{
+if (user){
+  navigate ("/")
+}
+})
 
 
   return (

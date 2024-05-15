@@ -2,19 +2,22 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ActivationPage from "./pages/ActivationPage";
-import axios from "axios";
 import { useEffect } from "react";
-import { server } from "../Constant";
 import store from "./redux/app/store";
-import { loadUser } from "./redux/actions/user";
+// import { loadUser } from "./redux/actions/user";
 import HomePage from "./pages/HomePage";
+import Products from "./pages/Products";
+import Bestsellings from "./pages/Bestsellings";
+import { useSelector } from "react-redux";
 
 
 function App() {
   
-  useEffect(()=>{
-    store.dispatch(loadUser());
-  })
+const {user} = useSelector(state => state.user)
+console.log(user);
+  // useEffect(()=>{
+  //   store.dispatch(loadUser());
+  // })
 
 
   return (
@@ -25,6 +28,9 @@ function App() {
           <Route path="/login" element={<Login></Login>} />
           <Route path="/register" element={<Register></Register>} />
           <Route path="/activation/:activationToken" element={<ActivationPage></ActivationPage>} />
+
+          <Route path="/products" element={<Products></Products>} />
+          <Route path="/best-selling" element={<Bestsellings></Bestsellings>} />
         </Routes>
         {/* <div className="flex">
           <Sidebar></Sidebar>

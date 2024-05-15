@@ -91,6 +91,7 @@ module.exports.activateUser =async(req,res,next)=>{
 
 
 module.exports.LoginUser =async(req,res,next)=>{
+  console.log("postman kam korteche");
   try {
     const { email, password } = req.body;
 

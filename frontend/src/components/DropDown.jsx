@@ -5,12 +5,12 @@ const DropDown = ({ categoriesData, setDropDown }) => {
   const navigate = useNavigate();
 
   const handleSubmit = (i) => {
-    navigate(`/products?category =${i.title}`);
+    navigate(`/products?category=${i.title}`);
     setDropDown(false);
     window.location.reload();
   };
   return (
-    <div className="pb-4 w-[270px] bg-white absolute z-30 rounded-b-sm shadow-md">
+    <div className="ms-2 pb-4 w-[270px] bg-white absolute z-30 rounded-b-sm shadow-md">
       {categoriesData.map((item, index) => (
         <div className={`${commonStyles.noramlFlex}`} key={index} onClick={()=> handleSubmit(item)}>
             <img src={item.image_Url} style={{
