@@ -15,23 +15,29 @@ import { CgProfile } from "react-icons/cg";
 import Cart from "./Cart";
 import Wishlist from "./Wishlist";
 import { useSelector } from "react-redux";
-import { server } from "../../Constant";
+
+import {
+  Sheet,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import logo from '../assets/icons/logo.png'
+
+
+
 
 // eslint-disable-next-line react/prop-types
 const SecondHeader = ({ active }) => {
   //demo purpose
-  let  isAuthenticated = false
-const {user} = useSelector(state => state.user)
-if (user !==null){
-   isAuthenticated = true
-}
+  let isAuthenticated = false;
+  const { user } = useSelector((state) => state.user);
+  if (user !== null) {
+    isAuthenticated = true;
+  }
 
   const [searchText, setSearchText] = useState();
   const [searchData, setSearchData] = useState();
   const [menuActive, setMenuActive] = useState(false);
   const [dropDown, setDropDown] = useState(false);
-  const [openWishlist, setOpenWishlist] = useState(false);
-  const [openCart, setOpenCart] = useState(false);
 
   const handleSearchChange = (e) => {
     const text = e.target.value;
@@ -58,25 +64,26 @@ if (user !==null){
         <div>
           <Link to="/">
             <img
-              src="https://shopo.quomodothemes.website/assets/images/logo.svg"
+            className="w-40"
+              src={logo}
               alt=""
             />
           </Link>
         </div>
 
-        <div className="w-[50%] relative">
-        <input
-    type="text"
-    placeholder="Search Product..."
-    value={searchText}
-    onChange={handleSearchChange}
-    className="h-[50px] w-full px-4 border-white border-[2px] rounded-full bg-blue-400 text-white placeholder-white"
-/>
-<AiOutlineSearch
-color="white"
-    size={30}
-    className="absolute right-4 top-3 cursor-pointer"
-/>
+        <div className="w-full md:w-[50%] relative ">
+          <input
+            type="text"
+            placeholder="Search Product..."
+            value={searchText}
+            onChange={handleSearchChange}
+            className="h-[50px] w-full px-4 border-white border-[2px] rounded-full bg-blue-400 text-white placeholder-white"
+          />
+          <AiOutlineSearch
+            color="white"
+            size={30}
+            className="absolute right-4 top-3 cursor-pointer"
+          />
           {searchData && searchData.length !== 0 ? (
             <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
               {searchData &&
@@ -122,7 +129,7 @@ color="white"
               className="bg-white text-black relative h-[68px] ml-2 mt-[10px] w-[270px] flex justify-between items-center cursor-pointer rounded-t-lg"
               onClick={() => setDropDown(!dropDown)}
             >
-              <div>
+              <div className="z-50">
                 <BiMenuAltLeft
                   size={30}
                   className="absolute top-5 left-2 "
@@ -145,10 +152,12 @@ color="white"
         <Navbar active={active}></Navbar>
 
         <div className="flex">
-          <div className={`${commonStyles.noramlFlex}`}>
+          
+          <Sheet>
+            <SheetTrigger>
+            <div className={`${commonStyles.noramlFlex}`}>
             <div
               className="relative cursor-pointer mr-[15px]"
-              onClick={() => setOpenWishlist(true)}
             >
               <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
               <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
@@ -157,32 +166,42 @@ color="white"
               </span>
             </div>
           </div>
+            </SheetTrigger>
+            <Wishlist></Wishlist>
+          </Sheet>
+
 
           <div className={`${commonStyles.noramlFlex}`}>
-            <div
-              className="relative cursor-pointer mr-[15px]"
-              onClick={() => setOpenCart(true)}
-            >
-              <AiOutlineShoppingCart size={30} color="rgb(255 255 255 / 83%)" />
-              <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                {/* {cart && cart.length} */}
-                {0}
-              </span>
-            </div>
+            <Sheet>
+              <SheetTrigger>
+                {" "}
+                <div
+                  className="relative cursor-pointer mr-[15px]"
+                >
+                  <AiOutlineShoppingCart
+                    size={30}
+                    color="rgb(255 255 255 / 83%)"
+                  />
+                  <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                    {/* {cart && cart.length} */}
+                    {0}
+                  </span>
+                </div>
+              </SheetTrigger>
+              <Cart></Cart>
+            </Sheet>
           </div>
 
           <div className={`${commonStyles.noramlFlex}`}>
             <div className="relative cursor-pointer mr-[15px]">
               {isAuthenticated ? (
                 <Link to="/profile">
-                <img
-                  src={`http://localhost:8000/uploaded-images/${user.avatar}`}
-
-
-className="w-[200px] h-[40px] rounded-full border-[3px] border-white border-spacing-14]"
-alt=""
-                />
-              </Link>
+                  <img
+                    src={`http://localhost:8000/uploaded-images/${user.avatar}`}
+                    className="w-20 md:w-[200px] h-[35px] md:h-[40px] rounded-full border-[3px] border-white border-spacing-14]"
+                    alt=""
+                  />
+                </Link>
               ) : (
                 <Link to="/login">
                   <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
@@ -191,11 +210,7 @@ alt=""
             </div>
           </div>
 
-          {/* cart popup */}
-          {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
-
-          {/* wishlist popup */}
-          {openWishlist ? <Wishlist setOpenWishlist={setOpenWishlist} /> : null}
+      
         </div>
       </div>
     </div>

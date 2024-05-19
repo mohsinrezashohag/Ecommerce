@@ -12,10 +12,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { server } from "../../Constant";
 import { useToast } from "@/components/ui/use-toast";
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const [userInfo, setUserInfo] = useState({
@@ -38,7 +39,7 @@ const Register = () => {
 
     formData.append("fullObject", JSON.stringify(userInfo));
     formData.append("avatar", avatar);
- await axios
+    await axios
       .post(`${server}/user/register`, formData)
       .then((res) => {
         toast({ title: res.data.message });
@@ -48,8 +49,14 @@ const Register = () => {
       .catch((res) => {
         toast({ title: res.err.message });
       });
-
   };
+
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  });
 
   return (
     <section className=" h-screen flex justify-center items-center">
@@ -147,7 +154,7 @@ const Register = () => {
                 >
                   <span>Upload a file</span>
                   <input
-                    filename = {avatar}
+                    filename={avatar}
                     type="file"
                     name="avatar"
                     id="file-input"

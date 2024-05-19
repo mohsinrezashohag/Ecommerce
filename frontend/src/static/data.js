@@ -393,7 +393,7 @@ export const navItems = [
       image_Url: [
         {
           public_id: "test",
-          url: "https://mirzacdns3.s3.ap-south-1.amazonaws.com/cache/catalog/RLV0015/2-800x800.jpg",
+          url: "https://cdn.thewirecutter.com/wp-content/media/2023/05/running-shoes-2048px-9718.jpg",
         },
         {
           public_id: "test",
@@ -434,7 +434,7 @@ export const navItems = [
         name: "Asus Ltd",
         shop_avatar: {
           public_id: "test",
-          url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
+          url: "https://bsmedia.business-standard.com/_media/bs/img/about-page/1562580690.jpg",
         },
         ratings: 4.2,
       },
@@ -444,9 +444,9 @@ export const navItems = [
       reviews: [
         {
           user: {
-            // user object will be here
+           
           },
-          comment: "IT's so cool!",
+          comment: "IT's so precious ! i would definietly suggest to my friends",
           rating: 5,
         },
       ],

@@ -65,10 +65,10 @@ const dispatch = useDispatch()
 
 const user = useSelector(state => state.user)
 useEffect(()=>{
-if (user){
+if (user ===null){
   navigate ("/")
 }
-})
+},[])
 
 
   return (
