@@ -23,9 +23,7 @@ const ProductCard = ({ product }) => {
     setClick(!click);
   };
 
-  // for organize the link
-  let productName = product?.name;
-  productName= productName.replace(/-/g, " ");
+
 
   return (
     <>
@@ -33,7 +31,7 @@ const ProductCard = ({ product }) => {
         <div className="flex justify-end"></div>
 
         {/* {`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`} */}
-        <Link to={`product/${productName}`}>
+        <Link to={`/product/${product.name.replace(/\s+/g, '_')}`}>
           <img
             src={`${product && product.image_Url[0].url}`}
             alt=""

@@ -23,7 +23,7 @@ const Account = () => {
 
 
     return (
-        <div className='mx-auto ms-40'>
+        <div className='mx-auto md:ms-40'>
         <div className="flex justify-start w-full h-fit mx-auto my-5">
           <div className="relative">
             <img

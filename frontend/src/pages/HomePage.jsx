@@ -4,6 +4,7 @@ import Events from "@/components/Events";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import Navbar from "@/components/Navbar";
 import SecondHeader from "@/components/SecondHeader";
 import Sponsor from "@/components/Sponsor";
 

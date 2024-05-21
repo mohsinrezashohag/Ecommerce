@@ -10,7 +10,7 @@ const Profile = () => {
 
     <div className={`${commonStyles.section}`}>
 
-      <div className="flex gap-3">
+      <div className="flex 800px:justify-between justify-start  gap-3">
        <div className="w-1/4">
        <ProfileSidebar></ProfileSidebar>
        </div>

@@ -4,11 +4,11 @@ import { Navigate } from 'react-router-dom';
 const ProtectedRoutes = ({children}) => {
     const {user} = useSelector(state => state.user)
     if(user === null){
-        <Navigate to="/login"></Navigate>
+      return  <Navigate to="/login" replace></Navigate>
     }
-    else{
+  
      return children
-    }
+  
 };
 
 export default ProtectedRoutes

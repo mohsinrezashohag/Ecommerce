@@ -271,11 +271,11 @@ export const navItems = [
       image_Url: [
         {
           public_id: "test",
-          url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
+          url: "https://mcsolution.com.bd/wp-content/uploads/2022/06/apple-macbook-pro-m2-2022-price-in-bangladesh-1200x1452.webp",
         },
         {
           public_id: "test",
-          url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
+          url: "https://mcsolution.com.bd/wp-content/uploads/2022/07/Apple-Macbook-Pro-M2-Chip-Price-in-BD.jpghttps://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.pnghttps://mcsolution.com.bd/wp-content/uploads/2022/07/Apple-Macbook-Pro-M2-Chip-Price-in-BD.jpg",
         },
       ],
       shop: {

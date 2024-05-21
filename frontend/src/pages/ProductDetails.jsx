@@ -14,12 +14,16 @@ const ProductDetails = () => {
   const [count, setCount] = useState(1);
   const [click,setClick] = useState(null)
 
-  const productName = name.replace(/-/g, " ");
+  const productName = name.replace(/\s+/g, '_');
+
+console.log(productName);
+
   useEffect(() => {
-    const data = productData.find((i) => i.name === productName);
+    const data = productData.find((product) => product.name.replace(/\s+/g, '_') === productName);
     setData(data);
   }, []);
 
+  console.log(data);
   // functions
   const incrementCount = () => {
     setCount(count + 1)
