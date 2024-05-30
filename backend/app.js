@@ -31,7 +31,11 @@ app.use(express.static('public'))
 // })
 // importing all routes
 const userRoutes = require('./routes/user.routes')
+const sellerRoutes = require('./routes/seller.routes')
+const productRoutes = require('./routes/product.routes')
 app.use('/api/v1/user',userRoutes)
+app.use('/api/v1/seller',sellerRoutes)
+app.use('/api/v1/product',productRoutes)
 
 dbConnect()
 // error handling

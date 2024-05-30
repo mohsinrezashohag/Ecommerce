@@ -25,8 +25,13 @@ const SecondHeader = ({ active }) => {
   //demo purpose
   let isAuthenticated = false;
   const { user } = useSelector((state) => state.user);
-  if (user !== null) {
+  const { seller } = useSelector((state) => state.seller);
+  
+  let currentLogin
+  if (user !== null || seller !== null) {
     isAuthenticated = true;
+    currentLogin = user  || seller
+
   }
 
   const [searchText, setSearchText] = useState();
@@ -100,7 +105,7 @@ const SecondHeader = ({ active }) => {
           </div>
 
           <div className={`${commonStyles.button}`}>
-            <Link to="/seller">
+            <Link to="/create-seller">
               <h1 className="text-white flex items-center">
                 Sell With Us <IoIosArrowForward className="ml-1" />
               </h1>
@@ -192,9 +197,9 @@ const SecondHeader = ({ active }) => {
             <div className={`${commonStyles.noramlFlex}`}>
               <div className="relative cursor-pointer mr-[15px]">
                 {isAuthenticated ? (
-                  <Link to="/profile">
+                  <Link to={`${currentLogin.role ==="user" ? "/profile" : "/seller-dashboard"}`}>
                     <img
-                      src={`http://localhost:8000/uploaded-images/${user.avatar}`}
+                      src={`http://localhost:8000/uploaded-images/${currentLogin.avatar}`}
                       className="w-20 md:w-[200px] h-[35px] md:h-[40px] rounded-full border-[3px] border-white border-spacing-14]"
                       alt=""
                     />
@@ -206,6 +211,7 @@ const SecondHeader = ({ active }) => {
                 )}
               </div>
             </div>
+
           </div>
         </div>
       </div>

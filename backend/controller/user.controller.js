@@ -17,19 +17,20 @@ module.exports.registerUser = async (req, res, next) => {
 
 
     const userExists = await User.findOne({ email: email });
+  
+  
+  
     if (userExists) {
       // If the user already exists, delete the newly uploaded file
       const filename = req.file.filename;
       const filePath = path.join('uploaded-images/', filename);
       fs.unlink(filePath, (err) => {
         if (err) {
-          console.error("Error deleting file:", err);
-          return res.status(500).json({
+           res.status(500).json({
             message: "Error deleting file",
           });
         } else {
-          console.log("File deleted successfully:", filename);
-          return res.json({ message: "File deleted successfully" });
+          return res.json({ message: "User already resister" });
         }
       });
     } 

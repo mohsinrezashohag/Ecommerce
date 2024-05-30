@@ -89,7 +89,7 @@ const MobileMenu = () => {
       </div>
 
       <div className={`${commonStyles.button}`}>
-        <Link to="/seller">
+        <Link to="/create-seller">
           <h1 className="text-white flex items-center">
             Sell With Us <IoIosArrowForward className="ml-1" />
           </h1>
